@@ -1,0 +1,7 @@
+# 실제 키·비밀번호
+.env
+# 팀 레포 코드 (서버에서 scripts/fetch-app.sh로 받아옴)
+app/
+# DB 초기 데이터 덤프 (용량이 커서 깃에 올리지 않고 서버로 직접 복사)
+db/init/*.sql
+db/init/*.sql.gz

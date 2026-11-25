@@ -1,0 +1,23 @@
+# SITE_ADDRESS가 ":80"이면 HTTP, 도메인 이름이면 Let's Encrypt 인증서를 자동 발급해 HTTPS로 서빙
+{$SITE_ADDRESS} {
+	encode zstd gzip
+
+	request_body {
+		max_size 12MB
+	}
+
+	# 백엔드로 보낼 요청 (REST API, WebSocket, 업로드 이미지, Swagger)
+	@backend path /api/* /ws /ws/* /uploads/* /apis /apis/* /swagger-ui/* /v3/api-docs /v3/api-docs/*
+	handle @backend {
+		reverse_proxy backend:8080
+	}
+
+	# 나머지는 프론트 (SPA: 없는 경로는 index.html)
+	handle {
+		root * /srv
+		try_files {path} {path}.html /index.html
+		file_server
+	}
+
+	header /_expo/static/* Cache-Control "public, max-age=31536000, immutable"
+}
