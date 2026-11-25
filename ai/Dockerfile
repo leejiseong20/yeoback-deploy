@@ -10,7 +10,7 @@ COPY --from=app . .
 RUN rm -rf .env dbData __pycache__
 # 팀 코드에 고정된 gemini-2.5-flash는 신규 API 키에서 더 이상 제공되지 않음
 # → 빌드 시점에만 모델명을 교체 (팀 레포 원본은 수정하지 않음)
-ARG GEMINI_MODEL=gemini-3.8-flash
+ARG GEMINI_MODEL=gemini-3.5-flash-lite
 RUN sed -i "s/gemini-2\.5-flash/${GEMINI_MODEL}/g" *.py \
  && ! grep -rn "gemini-2\.5-flash" *.py
 EXPOSE 8001

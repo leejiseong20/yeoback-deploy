@@ -71,7 +71,7 @@ services:
       additional_contexts:
         app: ${APP_DIR:-./app}/YeoBack-AI
       args:
-        GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.8-flash}
+        GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash-lite}
     restart: unless-stopped
     # 팀 코드(AIPlanService)에 AI 서버 주소가 http://localhost:8001 로 고정되어 있어
     # backend 컨테이너의 네트워크를 공유시켜 localhost로 통신하게 함
@@ -84,7 +84,7 @@ services:
     environment:
       DB_URL: mysql+pymysql://yeoback:${DB_PASSWORD}@db:3306/yeoback_db?charset=utf8mb4
       GEMINI_API_KEY: ${GEMINI_API_KEY:-}
-      GEMINI_CHAT_MODEL: ${GEMINI_MODEL:-gemini-3.8-flash}
+      GEMINI_CHAT_MODEL: ${GEMINI_MODEL:-gemini-3.5-flash-lite}
       AI_INTERNAL_API_KEY: ${AI_INTERNAL_API_KEY}
       TZ: Asia/Seoul
 
